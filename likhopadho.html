@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LikhoPadho — Stationery Shop, Gopalpura Jaipur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── CONFIG: Change these values to customise ── */
+  :root {
+    --shop-name: "LikhoPadho";
+    --brand: #1A56DB;
+    --brand-dark: #1341B0;
+    --brand-light: #EEF4FF;
+    --accent: #F59E0B;
+    --wa: #25D366;
+    --wa-dark: #128C7E;
+    --text: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --bg: #F9FAFB;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --font-head: 'Sora', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+  img { max-width: 100%; display: block; }
+  button { cursor: pointer; font-family: var(--font-body); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  /* ── TOPBAR ── */
+  .topbar { background: var(--brand); color: white; text-align: center; padding: 8px 16px; font-size: 13px; font-family: var(--font-body); }
+  .topbar span { color: var(--accent); font-weight: 600; }
+
+  /* ── NAV ── */
+  nav { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 38px; height: 38px; background: var(--brand); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .logo-text { font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--text); }
+  .logo-sub { font-size: 11px; color: var(--muted); margin-top: -2px; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn-wa-nav { background: var(--wa); color: white; border: none; border-radius: var(--radius-sm); padding: 9px 16px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 7px; transition: background 0.2s; }
+  .btn-wa-nav:hover { background: var(--wa-dark); }
+  .nav-search { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; gap: 8px; }
+  .nav-search input { border: none; background: transparent; font-size: 14px; font-family: var(--font-body); outline: none; width: 180px; color: var(--text); }
+  .nav-search input::placeholder { color: var(--muted); }
+
+  /* ── HERO ── */
+  .hero { background: linear-gradient(135deg, #1341B0 0%, #1A56DB 50%, #2563EB 100%); color: white; padding: 52px 0 48px; overflow: hidden; position: relative; }
+  .hero::before { content: ''; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+  .hero::after { content: ''; position: absolute; right: 80px; bottom: -100px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; z-index: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.3px; }
+  .hero h1 { font-family: var(--font-head); font-size: clamp(26px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 15px; color: rgba(255,255,255,0.82); margin-bottom: 28px; max-width: 420px; line-height: 1.7; }
+  .hero-btns { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--wa); color: white; border: none; border-radius: var(--radius-sm); padding: 13px 22px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 0 4px 14px rgba(37,211,102,0.35); }
+  .btn-primary:hover { background: var(--wa-dark); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); border-radius: var(--radius-sm); padding: 12px 20px; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+  .hero-stats { display: flex; gap: 28px; margin-top: 32px; }
+  .stat { }
+  .stat-num { font-family: var(--font-head); font-size: 22px; font-weight: 700; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+  .hero-visual { font-size: 100px; line-height: 1; opacity: 0.9; flex-shrink: 0; display: none; }
+  @media (min-width: 600px) { .hero-visual { display: block; } }
+
+  /* ── TRUST BAR ── */
+  .trust-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 0; }
+  .trust-list { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); font-weight: 500; }
+  .trust-item span:first-child { font-size: 18px; }
+
+  /* ── SECTION ── */
+  .section { padding: 44px 0; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .section-title { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
+  .section-link { color: var(--brand); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+  /* ── CATEGORIES ── */
+  .cats { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .cats::-webkit-scrollbar { display: none; }
+  .cat-btn { flex-shrink: 0; display: flex; align-items: center; gap: 8px; background: var(--white); border: 1.5px solid var(--border); border-radius: 24px; padding: 9px 18px; font-size: 13px; font-weight: 500; color: var(--text); transition: all 0.2s; white-space: nowrap; }
+  .cat-btn:hover, .cat-btn.active { background: var(--brand); color: white; border-color: var(--brand); }
+  .cat-btn .emoji { font-size: 16px; }
+
+  /* ── LOADING STATE ── */
+  .loading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .skeleton { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .skel-img { height: 160px; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+  .skel-line { height: 12px; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; margin: 12px; }
+  .skel-line.short { width: 60%; }
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+  /* ── PRODUCTS GRID ── */
+  #products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .prod-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; display: flex; flex-direction: column; }
+  .prod-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); border-color: #d1d5db; }
+  .prod-img-wrap { height: 160px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; overflow: hidden; }
+  .prod-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+  .prod-badge { position: absolute; top: 10px; left: 10px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.3px; text-transform: uppercase; }
+  .badge-hot { background: #FEF3C7; color: #92400E; }
+  .badge-new { background: #D1FAE5; color: #065F46; }
+  .badge-sale { background: #FEE2E2; color: #991B1B; }
+  .prod-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+  .prod-cat-tag { font-size: 11px; color: var(--brand); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+  .prod-name { font-family: var(--font-head); font-size: 14px; font-weight: 600; line-height: 1.4; margin-bottom: 8px; flex: 1; }
+  .prod-pricing { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+  .prod-price { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--brand); }
+  .prod-mrp { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+  .prod-discount { font-size: 11px; font-weight: 700; color: #059669; background: #D1FAE5; padding: 2px 7px; border-radius: 20px; }
+  .btn-order { width: 100%; background: var(--wa); color: white; border: none; border-radius: var(--radius-sm); padding: 10px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 7px; transition: background 0.2s; }
+  .btn-order:hover { background: var(--wa-dark); }
+  .btn-order svg { flex-shrink: 0; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 15px; }
+
+  /* ── OFFER BANNER ── */
+  .offer-banner { background: linear-gradient(135deg, #F59E0B, #FBBF24); border-radius: var(--radius); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin: 8px 0 44px; }
+  .offer-text h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: #451A03; margin-bottom: 5px; }
+  .offer-text p { font-size: 14px; color: #78350F; }
+  .btn-offer { background: #451A03; color: white; border: none; border-radius: var(--radius-sm); padding: 12px 22px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: all 0.2s; flex-shrink: 0; }
+  .btn-offer:hover { background: #292524; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 0; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 28px; }
+  .step { text-align: center; }
+  .step-num { width: 48px; height: 48px; background: var(--brand-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--brand); margin: 0 auto 14px; }
+  .step h4 { font-family: var(--font-head); font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer { background: #111827; color: #9CA3AF; padding: 40px 0 24px; }
+  .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .footer-brand .logo-text { color: white; font-size: 18px; }
+  .footer-brand p { font-size: 13px; margin-top: 10px; line-height: 1.7; }
+  .footer-contact h4 { color: white; font-family: var(--font-head); font-size: 14px; margin-bottom: 12px; }
+  .contact-item { display: flex; align-items: center; gap: 10px; font-size: 13px; margin-bottom: 10px; }
+  .footer-bottom { border-top: 1px solid #374151; padding-top: 20px; text-align: center; font-size: 12px; }
+
+  /* ── TOAST ── */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: #111827; color: white; padding: 12px 20px; border-radius: var(--radius-sm); font-size: 14px; z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s; pointer-events: none; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── WA FLOAT ── */
+  .wa-float { position: fixed; bottom: 24px; left: 24px; background: var(--wa); color: white; border: none; border-radius: 50px; padding: 13px 20px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 9px; box-shadow: 0 4px 20px rgba(37,211,102,0.5); z-index: 200; transition: all 0.2s; cursor: pointer; }
+  .wa-float:hover { background: var(--wa-dark); transform: scale(1.04); }
+  .wa-pulse { position: absolute; top: -4px; right: -4px; width: 14px; height: 14px; background: #FF4444; border-radius: 50%; border: 2px solid white; }
+
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .nav-search { display: none; }
+    .hero-stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<div class="topbar">
+  🎉 Back to school sale is on! Use code <span>SCHOOL10</span> for 10% off on orders above ₹199
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">📚</div>
+        <div>
+          <div class="logo-text">LikhoPadho</div>
+          <div class="logo-sub">Gopalpura, Jaipur</div>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <div class="nav-search">
+          <svg width="15" height="15" fill="none" stroke="#9CA3AF" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="search-input" placeholder="Search products..." oninput="filterProducts()">
+        </div>
+        <button class="btn-wa-nav" onclick="openWA('Hi! I want to place an order')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">📍 Serving Gopalpura &amp; all Jaipur</div>
+        <h1>Your neighbourhood<br>stationery shop,<br><em>now online.</em></h1>
+        <p>Notebooks, pens, art supplies &amp; more — order on WhatsApp and get same-day delivery in Gopalpura.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="openWA('Hi! I want to shop. Please share your catalogue.')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Shop on WhatsApp
+          </button>
+          <button class="btn-outline" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Browse all products ↓</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Products in stock</div></div>
+          <div class="stat"><div class="stat-num">15 min</div><div class="stat-label">Avg WhatsApp reply</div></div>
+          <div class="stat"><div class="stat-num">Same day</div><div class="stat-label">Delivery in Gopalpura</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">🛒</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST BAR ══ -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-list">
+      <div class="trust-item"><span>🛵</span> Same-day delivery in Gopalpura</div>
+      <div class="trust-item"><span>💳</span> Pay by UPI / cash on delivery</div>
+      <div class="trust-item"><span>📦</span> Free delivery above ₹299</div>
+      <div class="trust-item"><span>✅</span> Classmate, Natraj, Reynolds &amp; more</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRODUCTS SECTION ══ -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">All Products</h2>
+      <span id="product-count" style="font-size:13px; color: var(--muted);"></span>
+    </div>
+
+    <!-- Category filter -->
+    <div class="cats" id="cat-filter" style="margin-bottom: 24px;"></div>
+
+    <!-- Loading skeletons -->
+    <div id="loading-state" class="loading-grid">
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+    </div>
+
+    <!-- Products grid -->
+    <div id="products-grid" style="display:none;"></div>
+    <div id="empty-state" class="empty-state" style="display:none;">
+      <div class="icon">🔍</div>
+      <p>No products found. Try a different search or category.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OFFER BANNER ══ -->
+<div class="container">
+  <div class="offer-banner">
+    <div class="offer-text">
+      <h3>🏫 Bulk school orders? We've got you!</h3>
+      <p>Schools, coaching centres &amp; offices — get special prices on bulk stationery orders. WhatsApp us for a quote.</p>
+    </div>
+    <button class="btn-offer" onclick="openWA('Hi! I want to enquire about bulk/school orders.')">
+      Get bulk quote →
+    </button>
+  </div>
+</div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<div class="how-section">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">How to order</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Browse products</h4>
+        <p>Find what you need on this page or ask us on WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Click "Order on WhatsApp"</h4>
+        <p>A message with the product name is sent automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Confirm your order</h4>
+        <p>We'll confirm availability and share the total with delivery.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Pay &amp; receive</h4>
+        <p>Pay via UPI or cash. Same-day delivery in Gopalpura.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-text">📚 LikhoPadho</div>
+        <p>Your trusted neighbourhood stationery shop in Gopalpura, Jaipur. Quality products, fast delivery, honest prices.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact &amp; Order</h4>
+        <div class="contact-item">📍 Near Gopalpura Bypass, Jaipur, Rajasthan</div>
+        <div class="contact-item">📞 <a href="tel:+917742353712" style="color: inherit;">+91 77423 53712</a></div>
+        <div class="contact-item">🕐 Mon–Sat: 9am – 8pm</div>
+        <div class="contact-item">💬 <a onclick="openWA('Hello!')" style="color: #25D366; cursor:pointer;">Chat on WhatsApp</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 LikhoPadho, Gopalpura Jaipur. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ══ FLOATING WA BUTTON ══ -->
+<button class="wa-float" onclick="openWA('Hi! I want to place an order')">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Chat &amp; Order
+  <div class="wa-pulse"></div>
+</button>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — CHANGE THESE
+// ══════════════════════════════════════════════
+const CONFIG = {
+  whatsappNumber: '917742353712', // ← REPLACE with actual number (no + or spaces)
+  shopName: 'LikhoPadho',
+
+  // ── Google Sheets Integration ──
+  // Step 1: Create a Google Sheet with columns:
+  //   Name | Category | Price | MRP | Badge | Emoji | Description | Active
+  // Step 2: File → Share → Publish to web → CSV format → copy link
+  // Step 3: Paste the CSV URL below (replace the sample URL)
+  googleSheetCSV: 'YOUR_GOOGLE_SHEET_CSV_URL_HERE',
+
+  // ── Fallback demo products (shown if Google Sheet not connected) ──
+  demoProducts: [
+    { name: 'Classmate Notebook A4 (180 pages)', category: 'Notebooks', price: 65, mrp: 80, badge: 'hot', emoji: '📓', description: 'Ruled, high quality pages' },
+    { name: 'Classmate Notebook A5 (100 pages)', category: 'Notebooks', price: 40, mrp: 50, badge: '', emoji: '📒', description: 'Compact & handy' },
+    { name: 'Classmate Long Notebook', category: 'Notebooks', price: 55, mrp: 65, badge: 'new', emoji: '📔', description: 'Long size ruled' },
+    { name: 'Natraj HB Pencil (12 pack)', category: 'Pens & Pencils', price: 45, mrp: 55, badge: 'hot', emoji: '✏️', description: 'Smooth writing, strong lead' },
+    { name: 'Reynolds 045 Fine Carbure (10 pack)', category: 'Pens & Pencils', price: 99, mrp: 130, badge: 'sale', emoji: '🖊️', description: 'Black ink, fine tip' },
+    { name: 'Classmate Gel Pen Blue (5 pack)', category: 'Pens & Pencils', price: 75, mrp: 90, badge: '', emoji: '🖋️', description: 'Smooth gel flow' },
+    { name: 'Classmate Geometry Box', category: 'Geometry', price: 120, mrp: 145, badge: 'hot', emoji: '📐', description: 'Compass, protractor, ruler & more' },
+    { name: 'Apsara Colour Pencils (24 shades)', category: 'Art Supplies', price: 95, mrp: 110, badge: 'new', emoji: '🖍️', description: 'Vibrant, thick lead' },
+    { name: 'Camlin Watercolour Set (12 colours)', category: 'Art Supplies', price: 135, mrp: 160, badge: '', emoji: '🎨', description: 'For school art projects' },
+    { name: 'Fevistik Glue Stick (pack of 3)', category: 'Accessories', price: 55, mrp: 65, badge: '', emoji: '🗂️', description: 'Non-toxic, strong hold' },
+    { name: 'Kokuyo Stapler + Staples Set', category: 'Accessories', price: 180, mrp: 220, badge: 'sale', emoji: '📎', description: 'Office & school use' },
+    { name: 'A4 Printer Paper (500 sheets)', category: 'Paper', price: 280, mrp: 320, badge: '', emoji: '📄', description: '75 GSM, bright white' },
+  ]
+};
+
+// ══════════════════════════════════════════════
+// GLOBALS
+// ══════════════════════════════════════════════
+let allProducts = [];
+let activeCategory = 'All';
+
+// ══════════════════════════════════════════════
+// WHATSAPP
+// ══════════════════════════════════════════════
+function openWA(msg) {
+  const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+function orderProduct(name, price) {
+  const msg = `Hi! I'd like to order:\n\n🛍️ *${name}*\nPrice: ₹${price}\n\nPlease confirm availability and delivery details. Thank you!`;
+  openWA(msg);
+}
+
+// ══════════════════════════════════════════════
+// LOAD PRODUCTS
+// ══════════════════════════════════════════════
+async function loadProducts() {
+  if (CONFIG.googleSheetCSV && CONFIG.googleSheetCSV !== 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
+    try {
+      const res = await fetch(CONFIG.googleSheetCSV);
+      const text = await res.text();
+      allProducts = parseCSV(text);
+    } catch(e) {
+      console.warn('Could not load Google Sheet, using demo products.', e);
+      allProducts = CONFIG.demoProducts;
+    }
+  } else {
+    // Simulate a small delay to show skeleton loading
+    await new Promise(r => setTimeout(r, 800));
+    allProducts = CONFIG.demoProducts;
+  }
+  buildUI();
+}
+
+function parseCSV(csv) {
+  const lines = csv.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,'').toLowerCase());
+  const products = [];
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',').map(v => v.trim().replace(/"/g,''));
+    const obj = {};
+    headers.forEach((h, idx) => obj[h] = vals[idx] || '');
+    // Map to expected keys
+    if (obj.active && obj.active.toLowerCase() === 'false') continue;
+    products.push({
+      name: obj.name || obj.product || '',
+      category: obj.category || 'Other',
+      price: parseFloat(obj.price) || 0,
+      mrp: parseFloat(obj.mrp) || 0,
+      badge: (obj.badge || '').toLowerCase(),
+      emoji: obj.emoji || '📦',
+      description: obj.description || ''
+    });
+  }
+  return products.filter(p => p.name);
+}
+
+// ══════════════════════════════════════════════
+// BUILD UI
+// ══════════════════════════════════════════════
+function buildUI() {
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('products-grid').style.display = 'grid';
+  buildCategories();
+  renderProducts();
+}
+
+function buildCategories() {
+  const cats = ['All', ...new Set(allProducts.map(p => p.category))];
+  const wrap = document.getElementById('cat-filter');
+  wrap.innerHTML = cats.map(c => `
+    <button class="cat-btn ${c === 'All' ? 'active' : ''}" onclick="setCategory('${c}', this)">${c}</button>
+  `).join('');
+}
+
+function setCategory(cat, btn) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+
+function filterProducts() {
+  renderProducts();
+}
+
+function renderProducts() {
+  const q = (document.getElementById('search-input').value || '').toLowerCase();
+  let filtered = allProducts.filter(p => {
+    const matchCat = activeCategory === 'All' || p.category === activeCategory;
+    const matchQ = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  const grid = document.getElementById('products-grid');
+  const empty = document.getElementById('empty-state');
+  const count = document.getElementById('product-count');
+
+  count.textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  grid.style.display = 'grid';
+  empty.style.display = 'none';
+
+  grid.innerHTML = filtered.map(p => {
+    const discount = p.mrp > p.price ? Math.round((1 - p.price/p.mrp)*100) : 0;
+    const badgeMap = { hot: ['badge-hot', '🔥 Bestseller'], new: ['badge-new', '✨ New'], sale: ['badge-sale', '🏷️ Sale'] };
+    const [badgeClass, badgeLabel] = badgeMap[p.badge] || [];
+    return `
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <span>${p.emoji}</span>
+        ${badgeClass ? `<div class="prod-badge ${badgeClass}">${badgeLabel}</div>` : ''}
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat-tag">${p.category}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-pricing">
+          <div class="prod-price">₹${p.price}</div>
+          ${p.mrp > p.price ? `<div class="prod-mrp">₹${p.mrp}</div>` : ''}
+          ${discount > 0 ? `<div class="prod-discount">${discount}% off</div>` : ''}
+        </div>
+        <button class="btn-order" onclick="orderProduct('${p.name.replace(/'/g,"\\'")}', ${p.price})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+loadProducts();
+</script>
+</body>
+</html>
